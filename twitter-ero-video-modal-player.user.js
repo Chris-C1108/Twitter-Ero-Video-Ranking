@@ -4,6 +4,7 @@
 // @version      2.7
 // @description  视频模态框播放器 - 支持TikTok风格上下滑动切换,无需跳转页面
 // @author       Chris_C
+// @license      MIT
 // @match        https://twitter-ero-video-ranking.com/*
 // @match        https://x-ero-anime.com/*
 // @grant        GM_addStyle
