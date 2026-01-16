@@ -1,8 +1,18 @@
 // ==UserScript==
 // @name         Twitter排行榜：TikTok版
+// @name:en      Twitter Ranking: TikTok Style Player
+// @name:ja      Twitterランキング：TikTokスタイル
+// @name:ko      Twitter 랭킹: 틱톡 스타일
+// @name:ru      Рейтинг Twitter: Плеер в стиле TikTok
+// @name:th      การจัดอันดับ Twitter: ผู้เล่นสไตล์ TikTok
 // @namespace    loadingi.local
 // @version      2.7
 // @description  视频模态框播放器 - 支持TikTok风格上下滑动切换,无需跳转页面
+// @description:en Video modal player - Supports TikTok-style swipe switching without page redirection
+// @description:ja 動画モーダルプレーヤー - TikTokスタイルのスワイプ切り替え、ページ遷移なし
+// @description:ko 비디오 모달 플레이어 - 페이지 이동 없이 틱톡 스타일의 스와이프 전환 지원
+// @description:ru Модальный видеоплеер - Поддерживает переключение свайпом в стиле TikTok без перенаправления
+// @description:th เครื่องเล่นวิดีโอโมดอล - รองรับการสลับแบบปัดสไตล์ TikTok โดยไม่ต้องเปลี่ยนหน้า
 // @author       Chris_C
 // @license      MIT
 // @match        https://twitter-ero-video-ranking.com/*
