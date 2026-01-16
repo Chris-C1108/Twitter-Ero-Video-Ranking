@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Twitter排行榜：TikTok版
 // @namespace    loadingi.local
-// @version      2.6
+// @version      2.7
 // @description  视频模态框播放器 - 支持TikTok风格上下滑动切换,无需跳转页面
 // @author       Chris_C
 // @match        https://twitter-ero-video-ranking.com/*
