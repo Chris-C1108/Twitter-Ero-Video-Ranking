@@ -20,9 +20,9 @@
     *   **解决 403 问题**：内置智能防盗链规避策略（Referer Spoofing），完美解决 Twitter 视频无法播放的问题。
     *   **精准提取**：使用 `LD+JSON` 解析技术，精准获取真实的高清视频地址。
 *   **🚀 性能优化**：
-    *   **智能预加载**：自动缓存相邻视频的前 1MB 数据，秒开播放。
-    *   **内存管理**：内置 LRU 缓存清理机制，防止浏览器内存溢出。
-    *   **非阻塞初始化**：使用 `requestIdleCallback` 异步采集视频。
+    *   **智能预解析**：自动缓存相邻视频的真实地址，切换更快速。
+    *   **低功耗模式**：可选关闭预解析，减少网络请求。
+    *   **极简架构**：使用浏览器原生视频流，稳定可靠。
 
 ### 🎮 操作说明 (Controls)
 
@@ -31,12 +31,14 @@
 | **🖱️ 鼠标滚轮** | 上下切换视频 |
 | **👆 触摸滑动** | 上滑下一个，下滑上一个 |
 | **⌨️ 键盘 ↑ / ↓** | 上下切换视频 |
+| **⌨️ 键盘 ← / →** | 快退/快进 5 秒 |
 | **⌨️ 键盘 空格/Enter** | 播放/暂停 |
 | **⌨️ 键盘 Esc** | 关闭播放器 |
 | **❌ 关闭按钮** | 点击右上角或遮罩层空白处关闭 |
 | **❤️ 喜欢按钮** | 收藏/取消收藏视频 |
 | **⬇️ 下载按钮** | 在新标签页打开视频链接 |
 | **🔘 未读开关** | 过滤只显示未观看的视频 |
+| **🔋 低功耗开关** | 关闭预解析，减少资源占用 |
 | **📊 进度条拖放** | 点击或拖拽进度条跳转播放位置 |
 
 ### 🛠️ 怎么安装？ (Installation)
@@ -72,8 +74,9 @@ This Tampermonkey/Violentmonkey user script provides an immersive TikTok-style v
     *   **403 Fix**: Built-in Referer Spoofing strategy perfectly resolves Twitter video playback issues.
     *   **Accurate Extraction**: Uses `LD+JSON` parsing to fetch real HD video URLs.
 *   **🚀 Performance**:
-    *   **Smart Preload**: Caches the first 1MB of adjacent videos for instant playback.
-    *   **Memory Management**: Built-in LRU cache cleaning to prevent browser crashes.
+    *   **Smart Pre-resolution**: Pre-resolves adjacent video URLs for faster switching.
+    *   **Low Power Mode**: Optional mode to disable pre-resolution for reduced network usage.
+    *   **Minimal Architecture**: Uses native browser video streaming for maximum reliability.
 
 ### 🎮 Controls
 
@@ -82,6 +85,7 @@ This Tampermonkey/Violentmonkey user script provides an immersive TikTok-style v
 | **🖱️ Mouse Wheel** | Switch Videos Up/Down |
 | **👆 Touch Swipe** | Swipe Up for Next, Down for Prev |
 | **⌨️ Arrow ↑ / ↓** | Switch Videos |
+| **⌨️ Arrow ← / →** | Seek -5s / +5s |
 | **⌨️ Space / Enter** | Play / Pause |
 | **⌨️ Esc** | Close Player |
 | **❌ Close Button** | Click top-right or background |

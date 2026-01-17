@@ -1,5 +1,56 @@
 # Developer Log - Twitter Video Modal Player (TikTok Style)
 
+## 2026-01-17: Architecture Simplification - Abandoning HLS/Blob Prefetch
+
+### Context
+After extensive testing and user feedback, the HLS and Blob prefetch strategy proved to be fundamentally flawed for this use case. The complexity introduced more problems than it solved.
+
+### Version History & Key Changes
+
+#### v2.8.0: Radical Simplification - Direct Streaming Only
+**Problem**: 
+1. **HLS Detection Failure**: Twitter's mobile web version does not serve M3U8 URLs via scraping - only MP4 links are exposed in `LD+JSON` and page HTML. M3U8 links are only available through authenticated API calls.
+2. **Blob "3MB Wall"**: The partial blob prefetch (3MB) created a hard limit - videos longer than ~15-30 seconds would abruptly stop playing when the blob data was exhausted. The browser cannot seamlessly switch from a Blob URL to a network stream.
+3. **iOS Safari Blob Bugs**: iOS 15-17 had severe issues with Blob URLs (memory spikes, playback failure), requiring complex detection and workarounds.
+4. **Overengineering**: The caching system (LRU eviction, first-frame extraction, Safari-specific workarounds) added ~800 lines of code for marginal benefit.
+
+**Solution**: Complete removal of HLS and Blob prefetch systems. Return to simple, reliable direct streaming.
+
+**Removed Components**:
+- `hls.js` library dependency (`@require`)
+- `this.hls` instance and all `Hls.*` API calls
+- `blobCache`, `frameCache` Map caches
+- `warmupVideoConnection()`, `warmupWithFetch()` prefetch functions
+- `extractFirstFrame()` canvas screenshot logic
+- `manageBlobCacheSize()` LRU eviction
+- `PREFETCH_SIZE`, `MAX_BLOB_CACHE_SIZE`, `prefetchQueue` constants
+- `safariHasBlobIssues`, `iOSVersion` detection flags
+- All M3U8 regex patterns in `fetchRealVideoUrl()`
+- `stats.m3u8` tracking field
+
+**Retained**:
+- `videoUrlCache`: Still pre-resolves video page URLs to direct MP4 links (useful for faster switching)
+- Direct streaming via `video.src = url` (browser's native buffering handles everything correctly)
+- "Low Power Mode" (`低功耗模式`): Now skips URL pre-resolution instead of blob prefetch
+
+**UI Changes**:
+- Renamed "省电模式" (Power Saving) to "低功耗" (Low Power) for clarity
+- Fixed button position overlap on mobile (Low Power toggle was hidden behind Unread toggle)
+- Removed Debug button from permanent UI (was for HLS/Blob analysis)
+
+**Result**:
+- **-800 lines of code** removed
+- **Simpler, more reliable playback** - uses browser's native video stack
+- **No more "video stops at 15 seconds" bug**
+- **Works identically across all browsers** (no Safari-specific workarounds needed)
+
+### Technical Insights
+- **Premature Optimization Trap**: The Blob prefetch system was a solution looking for a problem. Modern browsers (including iOS Safari) handle progressive MP4 streaming very well. The "instant playback" from blob cache was often imperceptible vs. native buffering.
+- **HLS Availability**: HLS (M3U8) for Twitter videos requires authenticated API access. Web scraping only exposes MP4 variants.
+- **Simplicity Wins**: For a userscript, reliability > micro-optimization. The new code is easier to maintain and debug.
+
+---
+
 ## 2026-01-16: Visual Stability & iOS Safe Area Polish
 
 ### Context
