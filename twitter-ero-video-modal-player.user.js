@@ -6,7 +6,7 @@
 // @name:ru      Рейтинг Twitter: Плеер в стиле TikTok
 // @name:th      การจัดอันดับ Twitter: ผู้เล่นสไตล์ TikTok
 // @namespace    loadingi.local
-// @version      2.9.0
+// @version      2.9.1
 // @description  视频模态框播放器 - 支持TikTok风格上下滑动切换,无需跳转页面
 // @description:en Video modal player - Supports TikTok-style swipe switching without page redirection
 // @description:ja 動画モーダルプレーヤー - TikTokスタイルのスワイプ切り替え、ページ遷移なし
