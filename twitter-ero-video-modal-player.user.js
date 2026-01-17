@@ -109,6 +109,15 @@
             padding-right: env(safe-area-inset-right);
             opacity: 0;
             transition: opacity 0.3s var(--ease-smooth);
+            
+            /* Disable selection and touch callouts for long press speed */
+            -webkit-touch-callout: none !important;
+            -webkit-user-select: none !important;
+            -khtml-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+            -webkit-tap-highlight-color: transparent !important;
         }
 
         .tiktok-modal-overlay.active {
@@ -1293,6 +1302,13 @@
             const modal = document.createElement('div');
             modal.className = 'tiktok-modal-overlay';
             modal.id = 'tiktok-modal';
+
+            // Disable context menu to prevent conflicts with long press
+            modal.oncontextmenu = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            };
 
             modal.innerHTML = `
                 <!-- 顶部控制栏 -->
